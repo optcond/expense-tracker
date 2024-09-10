@@ -1,6 +1,7 @@
 import { ExpenseManager } from "../../../src/core/expenseManager";
 import { ExpenseResponder } from "../../../src/core/expenseResponder";
 import { ExpenseRepository } from "../../../src/repository/expenseRepository";
+import fs from "fs";
 
 describe(`ExpenseManager testing`, () => {
   let manager: ExpenseManager;
@@ -12,8 +13,10 @@ describe(`ExpenseManager testing`, () => {
 
   let responderSpy: jest.SpyInstance;
   let headerSpy: jest.SpyInstance;
+
+  const storageName = "test-expense";
   beforeEach(() => {
-    const repo = new ExpenseRepository("test-expense");
+    const repo = new ExpenseRepository(storageName);
     createSpy = jest.spyOn(repo, "create");
     updateSpy = jest.spyOn(repo, "update");
     deleteSpy = jest.spyOn(repo, "delete");
@@ -28,6 +31,7 @@ describe(`ExpenseManager testing`, () => {
     manager = new ExpenseManager(repo, responder);
   });
   afterEach(() => {
+    fs.unlinkSync(storageName);
     jest.clearAllMocks();
   });
   it(`test add ok`, () => {
