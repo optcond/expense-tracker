@@ -23,9 +23,9 @@ yarn build
 ```
 ## Usage
 ```
-yarn expense tracker [command]
+yarn expense-tracker [command]
 # use for all available commands with description:
-yarn expense tracker --help
+yarn expense-tracker --help
 ```
 ## Examples
 ```
